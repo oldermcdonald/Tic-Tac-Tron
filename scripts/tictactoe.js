@@ -27,16 +27,67 @@ When game won:
 
 
 --- Next steps: Make a CPU player! ---
-
 Behaviour:
   CPU must compare positions to determine best move
 
 */
 
+
+
+// var board = [
+//   ['1','2','3'],
+//   ['4','5','6'],
+//   ['7','8','9']
+// ];
+
 var board = [
-  ['1','2','3'],
-  ['4','5','6'],
-  ['7','8','9']
+  ['','',''],
+  ['','',''],
+  ['','','']
 ];
 
-console.log(board);
+console.log('Begin game');
+
+var playerMove = function (row, column, marker){
+  board[row][column] = marker; // replace with player marker
+  console.table(board);
+  console.log('Checking for a win:');
+  checkWin()
+}
+
+
+
+var checkWin = function(){
+  board.forEach(function(row){
+    console.log('Checking - each row');
+    console.log(row);
+    var matchCounter = 0;
+
+    for(i=0; i<row.length; i++) {
+      if(row[i] != "" && row[i] == row[i+1]){
+        matchCounter++;
+      }
+    }
+
+    if (matchCounter == 2) {
+      console.log('Row match!!')
+    } else {
+      console.log('No row match')
+    }
+  })
+
+
+  console.log('Checking - each column');
+
+  console.log('Checking - both diagonals');
+
+  console.log('Notify if game won or keep going');
+
+}
+
+
+playerMove(0,2,'O');
+playerMove(0,0,'O');
+playerMove(2,2,'X');
+playerMove(0,1,'O');
+playerMove(1,2,'X');
