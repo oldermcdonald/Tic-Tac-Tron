@@ -33,16 +33,11 @@ Behaviour:
 */
 
 
-var board = [
-  ['','',''],
-  ['','',''],
-  ['','','']
-];
+// Get DOM Objects
+var gameContainer = document.querySelector(`.game-container`);
+var boxes = document.querySelectorAll(`.game-container div`);
 
-console.log('------ BEGIN GAME ------');
 
-var boardWidth = board[0].length;
-var boardHeight = board.length;
 
 
 var playerMove = function (row, column, marker) {
@@ -56,19 +51,18 @@ var playerMove = function (row, column, marker) {
     checkWin()
 
   } else {
-    console.log('position taken');
+    console.log('Invalid move - position taken');
   }
   console.log(`END PLAYER MOVE`)
 }
 
 
+
 var checkWin = function() {
   console.log('------ CHECKING ALL ROWS ------');
   checkRow();
-
   console.log('------ CHECKING ALL COLUMNS ------');
   checkColumn();
-
   console.log('------ CHECKING DIAGONALS ------');
   checkDiagonal();
 }
@@ -77,47 +71,45 @@ var checkWin = function() {
 var checkRow = function(){
   board.forEach(function(row){
     console.log(`Checking Row: ${row}`);
-
-    var matchCounter = 0;
+    var foundMatchCount = 0;
     for(i=0; i<row.length; i++) {
       if(row[i] != "" && row[i] == row[i+1]){
-        matchCounter++;
+        foundMatchCount++;
       }
     }
-    if (matchCounter == 2) {
+    if (foundMatchCount == 2) {
       console.log('* Match found *')
+      gameWon();
     } else {
       console.log('Keep playing')
     }
   })
 }
 
-
 var checkColumn = function() {
   for (col=0; col < boardWidth; col++) {
-    var matchCounter = 0;
+    var foundMatchCount = 0;
     var column = [];
     // console.log(`Checking Column Number: ${col}`)
     for (row=0; row < boardHeight - 1; row++) {
       column.push(board[row][col]);
       if (board[row][col] != ""  &&  board[row][col] == board[row+1][col]) {
-        matchCounter++;
+        foundMatchCount++;
       }
       // console.log(`Does "${board[row][col]}" = "${board[row+1][col]}" | Round ${row}`)
-      // console.log(`matchCount = ${matchCounter}`)
+      // console.log(`matchCount = ${foundMatchCount}`)
     }
     column.push(board[row][boardHeight.length]) // Append last item
     console.log(`Checking Column ${column}`)
 
-    if (matchCounter == 2) {
+    if (foundMatchCount == 2) {
       console.log('* Match found *')
+      gameWon();
     } else {
       console.log('Keep playing')
     }
   }
 }
-
-
 
 var checkDiagonal = function(){
   // Hardcoded
@@ -125,12 +117,67 @@ var checkDiagonal = function(){
     console.log('* Match found *');
   } else if(board[2][0] == board[1][1] && board[1][1] == board[0][2]) {
     console.log('* Match found *');
+    gameWon();
   } else {
     console.log('Keep playing')
   }
 }
 
+var gameWon = function(){
+  console.log(`WINNER!`);
+}
 
+var handleClick = function(event){
+  var num = event.target.dataset.number;
+  event.target.style.background = "red";
+  console.log(num)
+}
+
+
+
+var whosTurnIsIt = function (){
+  if (roundCount % 2 == 0) {
+    return Object.keys(players)[0]
+  } else {
+    return Object.keys(players)[1]
+  }
+}
+
+// Event listeners
+boxes.forEach(function(box){
+  box.addEventListener('click', handleClick)
+})
+
+
+console.log('------ BEGIN GAME ------');
+
+var players = {
+  player1: {
+    name: 'Dave',
+    score: 0,
+    token: 'X',
+    colour: 'red'
+  },
+  player2: {
+    name: 'Stanley',
+    score: 0,
+    token: 'Y',
+    colour: 'blue'
+  }
+}
+
+var board = [
+  ['','',''],
+  ['','',''],
+  ['','','']
+];
+
+var boardWidth = board[0].length;
+var boardHeight = board.length;
+var roundCount = 0;
+
+
+// Testing manually
 playerMove(0,2,'O');
 playerMove(2,2,'X');
 playerMove(0,1,'O');
