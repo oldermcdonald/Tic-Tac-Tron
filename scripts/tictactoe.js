@@ -34,6 +34,14 @@ Behaviour:
   Give each potential position a rating and then do move with highest rating
 */
 
+// Manual Testing board
+// var board = [
+//   ['-','-','-'],
+//   ['-','-','-'],
+//   ['-','-','-'],
+// ];
+
+
 
 // Get DOM Objects
 var gameContainer = document.querySelector(`.game-container`);
@@ -42,6 +50,10 @@ var playersTurnDisplay = document.querySelector('.players-turn span');
 var gameStatus = document.querySelector('.game-status span');
 var player1Score = document.querySelector('.player1-score span');
 var player2Score = document.querySelector('.player2-score span');
+var boardSizeInput = document.querySelector('.board-size-input');
+var winStreakInput = document.querySelector('.win-streak-input');
+var configureButton = document.querySelector('.config-btn');
+
 
 
 var playerMove = function (row, column, marker) {  
@@ -100,7 +112,7 @@ var checkColumn = function() {
   for (col=0; col < boardWidth; col++) {
     // First make column array to check
     var currentColumn = [];
-    for (row=0; row <= 2; row++) {
+    for (row=0; row <= boardWidth -1 ; row++) {
       currentColumn.push(board[row][col]);
     }
     console.log(`Checking Column Number: ${col}`)
@@ -127,7 +139,6 @@ var checkColumn = function() {
 
 
 var checkDiagonal = function() {
-
   // if (board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
   //   console.log('* Match found *');
   //   gameWon();
@@ -157,6 +168,10 @@ var updateScores = function() {
   player2Score.textContent = players["Player 2"].score
 }
 
+var resetScores = function(){
+  players["Player 1"].score = 0;
+  players["Player 2"].score = 0;
+}
 
 var whosTurnIsIt = function (){
   if (clickCount % 2 == 0) {
@@ -166,6 +181,33 @@ var whosTurnIsIt = function (){
     playersTurnDisplay.textContent = Object.keys(players)[1]
     return Object.keys(players)[1]
   }
+}
+
+
+
+var generateBoard = function(boardSize){
+  var spaces = '-';
+  var newBoard = [];
+  var boxCount = 1;
+  // Setup console board
+  for(i=0; i<boardSize; i++) {
+    newBoard.push([]);
+
+    for (j=0; j<boardSize; j++) {
+    newBoard[i].push(spaces);
+
+    // Render Board
+    var newBox = document.createElement('div');
+    newBox.dataset.number = i.toString()+j.toString();
+    newBox.textContent = boxCount;
+    // Make new box listen
+    newBox.addEventListener('click', handleClick);
+    gameContainer.appendChild(newBox);
+    boxCount++;
+    }
+  }
+  // renderBoard();
+  return newBoard
 }
 
 
@@ -182,55 +224,27 @@ var handleClick = function(event){
 }
 
 
-
-var generateBoard = function(boardSize){
-  var spaces = '-';
-  var newBoard = []
-  var boxCount = 1;
-  // Setup console board
-  for(i=0; i<boardSize; i++) {
-    newBoard.push([]);
-
-    for (j=0; j<boardSize; j++) {
-    newBoard[i].push(spaces);
-
-    // Render Board
-    var newBox = document.createElement('div');
-    newBox.dataset.number = i.toString()+j.toString();
-    newBox.textContent = boxCount;
-    boxCount++;
-    gameContainer.appendChild(newBox);
-    }
+var newGame = function() {
+  console.log('new game click')
+  // Clear existing game container
+  while (gameContainer.hasChildNodes()){
+    gameContainer.removeChild(gameContainer.lastChild);
   }
-  // renderBoard();
-  return newBoard
+
+  // Reset all scores
+  resetScores();
+  updateScores();
+  
+  // Reset all counters
+  clickCount = 0;
+
+  // Re-configure board
+  marksInALineToWin = winStreakInput;
+  boardSize = boardSizeInput.value;
+
+  // Generate a new board
+  board = generateBoard(boardSize)
 }
-
-// var renderBoard = function() {
-//   var count = 1;
-//   for (i=0; i<boardSize; i++) {
-//     for (j=0; j<boardSize; j++) {
-
-//       var newBox = document.createElement('div');
-//       newBox.dataset.number = i.toString()+j.toString();
-//       newBox.textContent = count;
-//       count++;
-//       gameContainer.appendChild(newBox);
-
-//     }
-//   }
-// }
-
-  // // create a new list item from input
-  // var newTodoItem = document.createElement('li');
-  // newTodoItem.classList.add('todo-item');
-  // newTodoItem.textContent = newTodoInput.value;
-  // // Tell new item to listen to click as well
-  // newTodoItem.addEventListener('click', handleMarkComplete);
-  // // Append new child to existing list
-  // todoList.appendChild(newTodoItem);
-
-
 
 
 console.log('------ BEGIN GAME ------');
@@ -251,37 +265,19 @@ var players = {
 }
 
 
-// hardcoded 3*3 board - update to dynamically generated later and match divs
-// var board = [
-//   ['-','-','-'],
-//   ['-','-','-'],
-//   ['-','-','-'],
-// ];
+// newGame();
 
-
-var boardSize = 3;
+// Declare Variables
+var boardSize = boardSizeInput.value;
 var board = generateBoard(boardSize);
-console.log(board)
-
 var boardWidth = board[0].length;
 var boardHeight = board.length;
+
 var clickCount = 0;
 var currentPlayer;
-var marksInALineToWin = 3;
+var marksInALineToWin = winStreakInput.value;
 var roundWon = false;
 
 // Event listeners
-boxes.forEach(function(box){
-  box.addEventListener('click', handleClick)
-})
-
-
-// Manual Testing
-// playerMove(0,2,'O');
-// playerMove(2,2,'X');
-// playerMove(0,1,'O');
-// playerMove(0,0,'X');
-// playerMove(2,0,'X');
-// playerMove(1,0,'O');
-// playerMove(2,1,'X');
-// playerMove(1,1,'X');
+boxes.forEach(function(box){box.addEventListener('click', handleClick)});
+configureButton.addEventListener('click', newGame);
