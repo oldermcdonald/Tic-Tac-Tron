@@ -109,10 +109,10 @@ var checkRow = function(){
 
 
 var checkColumn = function() {
-  for (col=0; col < boardWidth; col++) {
+  for (col=0; col < boardSize; col++) {
     // First make column array to check
     var currentColumn = [];
-    for (row=0; row <= boardWidth -1 ; row++) {
+    for (row=0; row <= boardSize -1 ; row++) {
       currentColumn.push(board[row][col]);
     }
     console.log(`Checking Column Number: ${col}`)
@@ -139,6 +139,18 @@ var checkColumn = function() {
 
 
 var checkDiagonal = function() {
+  // Diagonal decending - column iterate
+
+  // Diagonal decending - row iterate
+
+
+  // Diagonal accending - column iterate
+
+  // diagonal accending - row iterate
+
+
+  
+
   // if (board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
   //   console.log('* Match found *');
   //   gameWon();
@@ -148,6 +160,10 @@ var checkDiagonal = function() {
   // } else {
   //   console.log('Keep playing')
   // }
+
+
+
+
 }
 
 
@@ -189,36 +205,50 @@ var generateBoard = function(boardSize){
   var spaces = '-';
   var newBoard = [];
   var boxCount = 1;
+  
+  // Remove previous classes
+  gameContainer.classList.removeChild;
+  gameContainer.className='game-container';
+
   // Setup console board
   for(i=0; i<boardSize; i++) {
     newBoard.push([]);
 
     for (j=0; j<boardSize; j++) {
-    newBoard[i].push(spaces);
+      newBoard[i].push(spaces);
+      // Render Board on DOM
+      var newBox = document.createElement('div');
+      newBox.dataset.number = i.toString()+j.toString();
+      newBox.textContent = boxCount;
+      // Make new boxes listen
+      newBox.addEventListener('click', handleClick);
+      gameContainer.appendChild(newBox);
+      boxCount++;
 
-    // Render Board
-    var newBox = document.createElement('div');
-    newBox.dataset.number = i.toString()+j.toString();
-    newBox.textContent = boxCount;
-    // Make new box listen
-    newBox.addEventListener('click', handleClick);
-    gameContainer.appendChild(newBox);
-    boxCount++;
+      // Append size class to box
+      if (boardSize == 3){
+        gameContainer.classList.add('three');
+      } else if (boardSize == 4 ){
+        gameContainer.classList.add('four');      
+      } else if (boardSize == 5 ){
+        gameContainer.classList.add('five')
+      } else if (boardSize == 6) {
+        gameContainer.classList.add('six')
+      }
     }
   }
-  // renderBoard();
   return newBoard
 }
 
 
 var handleClick = function(event){
-  currentPlayer = whosTurnIsIt()
   var clickedBoxId = event.target.dataset.number;
   console.log(`User Clicked Box: ${clickedBoxId}`)
   // Convert clickedBoxId to row & column
   var row = Number(clickedBoxId.toString()[0])
   var column = Number(clickedBoxId.toString()[1])
   // Player makes their move
+  currentPlayer = whosTurnIsIt()
   playerMove(row, column, players[currentPlayer].token)
   clickCount++;
 }
@@ -226,23 +256,25 @@ var handleClick = function(event){
 
 var newGame = function() {
   console.log('new game click')
-  // Clear existing game container
+  // Clear existing game container divs
   while (gameContainer.hasChildNodes()){
     gameContainer.removeChild(gameContainer.lastChild);
   }
 
-  // Reset all scores
-  resetScores();
-  updateScores();
-  
+  // Reset DOM elements
+  gameStatus.textContent = "";
+  document.body.style.backgroundColor = "transparent";
+
+  // resetScores();
+  // updateScores();
+
+  roundWon = false;
   // Reset all counters
   clickCount = 0;
-
-  // Re-configure board
-  marksInALineToWin = winStreakInput;
-  boardSize = boardSizeInput.value;
-
+  // Get user configurations
+  marksInALineToWin = winStreakInput.value;
   // Generate a new board
+  boardSize = boardSizeInput.value;
   board = generateBoard(boardSize)
 }
 
@@ -270,8 +302,7 @@ var players = {
 // Declare Variables
 var boardSize = boardSizeInput.value;
 var board = generateBoard(boardSize);
-var boardWidth = board[0].length;
-var boardHeight = board.length;
+// var boardWidth = board[0].length;
 
 var clickCount = 0;
 var currentPlayer;

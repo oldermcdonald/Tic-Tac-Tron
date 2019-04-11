@@ -1,13 +1,33 @@
 .game-container {
-  width: 420px;
   display: flex;
   flex-wrap: wrap;
+  height: 450px;
+  width: 450px;
 }
 
 .game-container div {
   background-color: grey;
-  width: 100px;
-  height: 100px;
-  margin: 2px;
   border: 1px solid black;
+}
+
+
+
+.three div {
+  width: 33.3%;
+  height: 33.3%;
+}
+
+.four div {
+  width: 25%;
+  height: 25%;
+}
+
+.five div {
+  width: 20%;
+  height: 20%;
+}
+
+.six div {
+  width: 16.6%;
+  height: 16.6%;
 }
