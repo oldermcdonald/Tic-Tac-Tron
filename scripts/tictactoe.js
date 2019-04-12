@@ -51,6 +51,8 @@ var playerMove = function (row, column, marker) {
     if (board[row][column] == spaces) {
       // Update array with player marker
       board[row][column] = marker;
+      // Swap to other player
+      clickCount++;
       // Update Colour
       event.target.style.background = players[currentPlayer].colour;
       console.table(board);
@@ -71,6 +73,7 @@ var checkWin = function() {
   checkColumn(boardSize, board);
   console.log('--- CHECKING DIAGONALS ---');
   checkDiagonalDecending();
+  checkDiagonalAcending();
 }
 
 
@@ -125,43 +128,69 @@ var checkColumn = function(numCols, board) {
 }
 
 
-
-var checkDiagonalDecending = function() {
-  console.table(board);
-
+// Just swapped push and shift to reverse (refactor later)
+var checkDiagonalAcending = function() {
   // 1. Make a copy of the original board ready to shift
   var boardShifted = [];
   board.forEach(function(row){
     boardShifted.push(row.slice(0));
   })
-
   // 2. Calculate number of columns once board has been shifted
-  var shiftedBoardColNum = (boardSize * 2)-1;
-
+  var shiftedColumns = (boardSize * 2)-1;
   // 3. Shift the array by adding blanks
   var frontAdd = boardSize;
   var endAdd = 0;
   for (i=0; i < boardSize; i++){
-
-    // Add to front of array
+    // Add spaces to front of array
     for (j=0; j < frontAdd - 1; j++){
-      boardShifted[i].unshift("F");
+      boardShifted[i].push(spaces);
     }
     frontAdd--;
-
-    // Add to end of array
+    // Add spaces to end of array
     for (k=0; k < endAdd; k++){
       if (i > 0) {
-        boardShifted[i].push("E");
+        boardShifted[i].unshift(spaces);
       }
     }
     endAdd++;
   }
+  console.table(board);
   console.table(boardShifted)
+  // Then run checkColumn() on the shifted array
+  checkColumn(shiftedColumns, boardShifted);
 }
 
 
-
+var checkDiagonalDecending = function() {
+  // 1. Make a copy of the original board ready to shift
+  var boardShifted = [];
+  board.forEach(function(row){
+    boardShifted.push(row.slice(0));
+  })
+  // 2. Calculate number of columns once board has been shifted
+  var shiftedColumns = (boardSize * 2)-1;
+  // 3. Shift the array by adding blanks
+  var frontAdd = boardSize;
+  var endAdd = 0;
+  for (i=0; i < boardSize; i++){
+    // Add spaces to front of array
+    for (j=0; j < frontAdd - 1; j++){
+      boardShifted[i].unshift(spaces);
+    }
+    frontAdd--;
+    // Add spaces to end of array
+    for (k=0; k < endAdd; k++){
+      if (i > 0) {
+        boardShifted[i].push(spaces);
+      }
+    }
+    endAdd++;
+  }
+  console.table(board);
+  console.table(boardShifted)
+  // Then run checkColumn() on the shifted array
+  checkColumn(shiftedColumns, boardShifted);
+}
 
 
 
@@ -197,6 +226,7 @@ var whosTurnIsIt = function (){
   }
 }
 
+
 var generateBoard = function(boardSize){
   var newBoard = [];
   var boxCount = 1;
@@ -212,7 +242,8 @@ var generateBoard = function(boardSize){
       // Render Board on DOM
       var newBox = document.createElement('div');
       newBox.dataset.number = i.toString()+j.toString();
-      newBox.textContent = boxCount;
+      // Add number to box
+      // newBox.textContent = boxCount;
       // Make new boxes listen
       newBox.addEventListener('click', handleClick);
       gameContainer.appendChild(newBox);
@@ -242,7 +273,7 @@ var handleClick = function(event){
   // Player makes their move
   currentPlayer = whosTurnIsIt()
   playerMove(row, column, players[currentPlayer].token)
-  clickCount++;
+
 }
 
 
@@ -297,15 +328,6 @@ var roundWon = false;
 
 // Generate initial board
 var board = generateBoard(boardSize);
-
-
-
-
-
-checkDiagonalDecending();
-
-
-
 
 
 

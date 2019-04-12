@@ -1,3 +1,29 @@
+body {
+  font-family: Arial, Helvetica, sans-serif
+}
+
+.title {
+  font-size: 3em;
+  color: black;
+  text-align: center;
+}
+
+
+.scoreboard {
+  display: flex;
+  justify-content: space-between;
+  width: 450px;
+}
+
+
+.player-container {
+  border: 1px solid black;
+  height: 10em;
+}
+
+
+
+
 .game-container {
   display: flex;
   flex-wrap: wrap;
@@ -6,11 +32,13 @@
 }
 
 .game-container div {
-  background-color: grey;
+  background-color: lightgrey;
   border: 1px solid black;
 }
 
-
+.game-container div:hover {
+  background-color: white;
+}
 
 .three div {
   width: 33.3%;

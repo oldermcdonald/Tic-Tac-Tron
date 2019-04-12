@@ -9,19 +9,44 @@
   <title>Tic Tac Toe</title>
 </head>
 <body>
-  <h1>Tic Tac Toe</h1>
-  <input class="board-size-input" type="text" placeholder="Number of rows" value="3">
-  <input class="win-streak-input" type="text" placeholder="How many in a row" value="3">
-  <button class="config-btn">play</button>
+  <head>
+    <h1 class="title">Tic Tac Toe</h1>
 
+    <div class="scoreboard">
 
+      <div class="player-container">
+        <h3>PLAYER ONE</h3>
+        <p class="player1-score">score: <span>0</span></p>
+      </div>
+
+      <div class="player-container">
+        <h3>PLAYER TWO</h3>
+        <p class="player2-score">score: <span>0</span></p>
+      </div>
+
+    </div>
+  </head>
+
+  
   <div class="game-container three">
   </div>
-
+  
   <p class="players-turn">Who just clicked: <span></span></p>
   <p class="game-status">Game status: <span></span></p>
-  <p class="player1-score">Player 1 score: <span>0</span></p>
-  <p class="player2-score">Player 2 score: <span>0</span></p>
+  
+  <button class="config-btn">PLAY</button>
+
+
+  <div class="settings-container">
+    <h3>Settings</h3>
+    <P>Select Board Size</P>
+    <input class="board-size-input" type="text" placeholder="Number of rows" value="4">
+    
+    <p>Select number in row to win</p>
+    <input class="win-streak-input" type="text" placeholder="How many in a row" value="3">
+    
+  </div>
+
 
 
   <script src="./scripts/tictactoe.js"></script>
