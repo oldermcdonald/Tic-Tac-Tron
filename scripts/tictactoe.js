@@ -1,36 +1,6 @@
 /*
 GA SEI - Project 1 - Tic Tac Toe Game
-
-Planning:
---- First iteration of the game will be for human vs human ---
-
-Setup game board:
-  1. Draw a grid that is 3 x 3
-  2. Choose which player goes first
-
-Define the rules of the game:
-  1. player1 & player2 take alternating turns.
-  2. Players cannot click on boxes that have been assigned already.
-  3. If a player gets three in a row or column then they win the game.
-  4. Otherwise its a draw.
-
-During a players turn:
-  1. When player1 clicks a box make it a 'o'
-  2. When player2 clicks a box make it a 'x'
-  3. Check if game is over
-
-When game won:
-  1. Visually identify which player has won
-  2. Add to the winning players overall score to count rounds
-  3. Reset the board for a new game
-  4. player2 now goes first instead of player1.
-
---- Next steps: Make a CPU player! ---
-Behaviour:
-  CPU must compare positions to determine best move
-  Give each potential position a rating and then do move with highest rating
 */
-
 
 // Get DOM Objects
 var gameContainer = document.querySelector(`.game-container`);
@@ -65,7 +35,6 @@ var playerMove = function (row, column, marker) {
   }
 }
 
-
 var checkWin = function() {
   console.log('---- CHECKING ROWS ----');
   checkRow();
@@ -75,7 +44,6 @@ var checkWin = function() {
   checkDiagonalDecending();
   checkDiagonalAcending();
 }
-
 
 var checkRow = function(){
   board.forEach(function(row){
@@ -97,7 +65,6 @@ var checkRow = function(){
     })
   })
 }
-
 
 var checkColumn = function(numCols, board) {
   for (col=0; col < numCols; col++) {
@@ -126,7 +93,6 @@ var checkColumn = function(numCols, board) {
     });
   }
 }
-
 
 // Just swapped push and shift to reverse (refactor later)
 var checkDiagonalAcending = function() {
@@ -191,9 +157,6 @@ var checkDiagonalDecending = function() {
   // Then run checkColumn() on the shifted array
   checkColumn(shiftedColumns, boardShifted);
 }
-
-
-
 
 
 var gameWon = function() {
@@ -273,7 +236,6 @@ var handleClick = function(event){
   // Player makes their move
   currentPlayer = whosTurnIsIt()
   playerMove(row, column, players[currentPlayer].token)
-
 }
 
 
@@ -283,14 +245,9 @@ var newGame = function() {
   while (gameContainer.hasChildNodes()){
     gameContainer.removeChild(gameContainer.lastChild);
   }
-
   // Reset DOM elements
   gameStatus.textContent = "";
   document.body.style.backgroundColor = "transparent";
-
-  // resetScores();
-  // updateScores();
-
   roundWon = false;
   // Reset all counters
   clickCount = 0;
@@ -301,8 +258,8 @@ var newGame = function() {
   board = generateBoard(boardSize)
 }
 
-console.log('---- BEGIN GAME ----');
 
+// Declare Global Variables
 var players = {
   'Player 1': {
     name: 'Dave',
@@ -317,8 +274,6 @@ var players = {
     colour: 'lightblue'
   }
 }
-
-// Declare Global Variables
 var boardSize = boardSizeInput.value;
 var spaces;
 var clickCount = 0;
@@ -328,9 +283,6 @@ var roundWon = false;
 
 // Generate initial board
 var board = generateBoard(boardSize);
-
-
-
 
 // Event listeners
 boxes.forEach(function(box){box.addEventListener('click', handleClick)});

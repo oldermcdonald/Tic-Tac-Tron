@@ -21,6 +21,12 @@ body {
   height: 10em;
 }
 
+.score span{
+  font-size: 2em;
+  color: blue
+}
+
+
 
 
 
