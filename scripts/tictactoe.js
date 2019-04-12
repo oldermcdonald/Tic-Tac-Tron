@@ -2,7 +2,6 @@
 GA SEI - Project 1 - Tic Tac Toe Game
 
 Planning:
-
 --- First iteration of the game will be for human vs human ---
 
 Setup game board:
@@ -26,21 +25,11 @@ When game won:
   3. Reset the board for a new game
   4. player2 now goes first instead of player1.
 
-
 --- Next steps: Make a CPU player! ---
-
 Behaviour:
   CPU must compare positions to determine best move
   Give each potential position a rating and then do move with highest rating
 */
-
-// Manual Testing board
-// var board = [
-//   ['-','-','-'],
-//   ['-','-','-'],
-//   ['-','-','-'],
-// ];
-
 
 
 // Get DOM Objects
@@ -55,12 +44,11 @@ var winStreakInput = document.querySelector('.win-streak-input');
 var configureButton = document.querySelector('.config-btn');
 
 
-
 var playerMove = function (row, column, marker) {  
   if (!roundWon) {
     console.log(`--BEGIN PLAYER MOVE--`)
     // check that array position is empty
-    if (board[row][column] == '-') {
+    if (board[row][column] == spaces) {
       // Update array with player marker
       board[row][column] = marker;
       // Update Colour
@@ -77,12 +65,12 @@ var playerMove = function (row, column, marker) {
 
 
 var checkWin = function() {
-  console.log('------ CHECKING ALL ROWS ------');
+  console.log('---- CHECKING ROWS ----');
   checkRow();
-  console.log('------ CHECKING ALL COLUMNS ------');
-  checkColumn();
-  console.log('------ CHECKING DIAGONALS ------');
-  checkDiagonal();
+  console.log('---- CHECKING COLUMNS ----');
+  checkColumn(boardSize, board);
+  console.log('--- CHECKING DIAGONALS ---');
+  checkDiagonalDecending();
 }
 
 
@@ -92,9 +80,9 @@ var checkRow = function(){
     var duplicateCounter = 0;
     var lastValue = '';
     row.forEach(function(currentValue){
-      if (currentValue!= '-' && currentValue === lastValue) {
+      if (currentValue!= spaces && currentValue === lastValue) {
         duplicateCounter ++;
-        if (duplicateCounter >= (marksInALineToWin - 1)) {
+        if (duplicateCounter >= (numMatchesRequired - 1)) {
           console.log('* Match found *')
           gameWon();
         }
@@ -108,8 +96,8 @@ var checkRow = function(){
 }
 
 
-var checkColumn = function() {
-  for (col=0; col < boardSize; col++) {
+var checkColumn = function(numCols, board) {
+  for (col=0; col < numCols; col++) {
     // First make column array to check
     var currentColumn = [];
     for (row=0; row <= boardSize -1 ; row++) {
@@ -121,9 +109,9 @@ var checkColumn = function() {
     var duplicateCounter = 0;
     var lastValue = '';
     currentColumn.forEach(function(currentValue){
-      if (currentValue!= '-' && currentValue === lastValue) {
+      if (currentValue!= spaces && currentValue === lastValue) {
         duplicateCounter ++;
-        if (duplicateCounter >= (marksInALineToWin - 1)) {
+        if (duplicateCounter >= (numMatchesRequired - 1)) {
           console.log('* Match found *')
           gameWon();
         }
@@ -138,33 +126,43 @@ var checkColumn = function() {
 
 
 
-var checkDiagonal = function() {
-  // Diagonal decending - column iterate
+var checkDiagonalDecending = function() {
+  console.table(board);
 
-  // Diagonal decending - row iterate
+  // 1. Make a copy of the original board ready to shift
+  var boardShifted = [];
+  board.forEach(function(row){
+    boardShifted.push(row.slice(0));
+  })
 
+  // 2. Calculate number of columns once board has been shifted
+  var shiftedBoardColNum = (boardSize * 2)-1;
 
-  // Diagonal accending - column iterate
+  // 3. Shift the array by adding blanks
+  var frontAdd = boardSize;
+  var endAdd = 0;
+  for (i=0; i < boardSize; i++){
 
-  // diagonal accending - row iterate
+    // Add to front of array
+    for (j=0; j < frontAdd - 1; j++){
+      boardShifted[i].unshift("F");
+    }
+    frontAdd--;
 
-
-  
-
-  // if (board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
-  //   console.log('* Match found *');
-  //   gameWon();
-  // } else if(board[2][0] == board[1][1] && board[1][1] == board[0][2]) {
-  //   console.log('* Match found *');
-  //   gameWon();
-  // } else {
-  //   console.log('Keep playing')
-  // }
-
-
-
-
+    // Add to end of array
+    for (k=0; k < endAdd; k++){
+      if (i > 0) {
+        boardShifted[i].push("E");
+      }
+    }
+    endAdd++;
+  }
+  console.table(boardShifted)
 }
+
+
+
+
 
 
 
@@ -199,21 +197,16 @@ var whosTurnIsIt = function (){
   }
 }
 
-
-
 var generateBoard = function(boardSize){
-  var spaces = '-';
   var newBoard = [];
   var boxCount = 1;
-  
+  spaces = '-';
   // Remove previous classes
   gameContainer.classList.removeChild;
   gameContainer.className='game-container';
-
   // Setup console board
   for(i=0; i<boardSize; i++) {
     newBoard.push([]);
-
     for (j=0; j<boardSize; j++) {
       newBoard[i].push(spaces);
       // Render Board on DOM
@@ -224,7 +217,6 @@ var generateBoard = function(boardSize){
       newBox.addEventListener('click', handleClick);
       gameContainer.appendChild(newBox);
       boxCount++;
-
       // Append size class to box
       if (boardSize == 3){
         gameContainer.classList.add('three');
@@ -272,14 +264,13 @@ var newGame = function() {
   // Reset all counters
   clickCount = 0;
   // Get user configurations
-  marksInALineToWin = winStreakInput.value;
+  numMatchesRequired = winStreakInput.value;
   // Generate a new board
   boardSize = boardSizeInput.value;
   board = generateBoard(boardSize)
 }
 
-
-console.log('------ BEGIN GAME ------');
+console.log('---- BEGIN GAME ----');
 
 var players = {
   'Player 1': {
@@ -296,18 +287,28 @@ var players = {
   }
 }
 
-
-// newGame();
-
-// Declare Variables
+// Declare Global Variables
 var boardSize = boardSizeInput.value;
-var board = generateBoard(boardSize);
-// var boardWidth = board[0].length;
-
+var spaces;
 var clickCount = 0;
 var currentPlayer;
-var marksInALineToWin = winStreakInput.value;
+var numMatchesRequired = winStreakInput.value;
 var roundWon = false;
+
+// Generate initial board
+var board = generateBoard(boardSize);
+
+
+
+
+
+checkDiagonalDecending();
+
+
+
+
+
+
 
 // Event listeners
 boxes.forEach(function(box){box.addEventListener('click', handleClick)});
