@@ -75,6 +75,23 @@ header h1 {
   height: 16.6%;
 }
 
+.play-again-end-btn {
+  border-radius: 0.2em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 0.5em 2em;
+  text-decoration: none;
+  font-size: 2em;
+  background-color: black;
+  color: white;
+}
+
+
+.hidden {
+  display: none;
+}
+
 
 /* @media only screen and (min-width: 600px) {
   body {
@@ -82,3 +99,5 @@ header h1 {
 
   }
 } */
+
+

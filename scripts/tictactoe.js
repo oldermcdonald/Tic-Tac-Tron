@@ -1,6 +1,5 @@
-/*
-GA SEI - Project 1 - Tic Tac Toe Game
-*/
+// GA SEI - Project 1 - Tic Tac Toe Game
+// David McDonald - April 2019
 
 // Get DOM Objects
 var gameContainer = document.querySelector(`.game-container`);
@@ -11,7 +10,8 @@ var player1Score = document.querySelector('.player1-score span');
 var player2Score = document.querySelector('.player2-score span');
 var boardSizeInput = document.querySelector('.board-size-input');
 var winStreakInput = document.querySelector('.win-streak-input');
-var configureButton = document.querySelector('.config-btn');
+var reconfigureBtn = document.querySelector('.config-btn');
+var playAgainEndBtn = document.querySelector('.play-again-end-btn');
 var drawDisplay = document.querySelector('.draw-count span');
 
 
@@ -30,7 +30,7 @@ var playerMove = function (row, column, marker) {
       checkWin()
       // Iterate click count for other player
       clickCount++;
-      
+
         // If all clicked, then draw
       if (clickCount == (boardSize * boardSize)){
         gameDraw ();
@@ -167,7 +167,6 @@ var checkDiagonalDecending = function() {
   checkColumn(shiftedColumns, boardShifted);
 }
 
-
 var gameWon = function() {
   console.log(`* ${currentPlayer} WINS THE ROUND *`);
   gameStatus.textContent = "Winner: " + currentPlayer;
@@ -175,15 +174,14 @@ var gameWon = function() {
   players[currentPlayer].score ++
   updateScores();
   roundWon = true;
+  playAgainEndBtn.classList.toggle('hidden');
 }
-
 
 var gameDraw = function(){
   console.log(`Game Draw`)
   drawCount ++;
   drawDisplay.textContent = drawCount;
 }
-
 
 var updateScores = function() {
   player1Score.textContent = players["Player 1"].score
@@ -222,8 +220,6 @@ var generateBoard = function(boardSize){
       // Render Board on DOM
       var newBox = document.createElement('div');
       newBox.dataset.number = i.toString()+j.toString();
-      // Add number to box
-      // newBox.textContent = boxCount;
       // Make new boxes listen
       newBox.addEventListener('click', handleClick);
       gameContainer.appendChild(newBox);
@@ -263,10 +259,10 @@ var newGame = function() {
     gameContainer.removeChild(gameContainer.lastChild);
   }
   // Reset DOM elements
+  playAgainEndBtn.classList.toggle('hidden');
   gameStatus.textContent = "";
   document.body.style.backgroundColor = "transparent";
   roundWon = false;
-  // Reset all counters
   clickCount = 0;
   // Get user configurations
   numMatchesRequired = winStreakInput.value;
@@ -274,7 +270,6 @@ var newGame = function() {
   boardSize = boardSizeInput.value;
   board = generateBoard(boardSize)
 }
-
 
 // Declare Global Variables
 var players = {
@@ -304,4 +299,6 @@ var board = generateBoard(boardSize);
 
 // Event listeners
 boxes.forEach(function(box){box.addEventListener('click', handleClick)});
-configureButton.addEventListener('click', newGame);
+reconfigureBtn.addEventListener('click', newGame);
+
+playAgainEndBtn.addEventListener('click', newGame);
