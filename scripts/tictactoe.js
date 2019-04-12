@@ -14,7 +14,6 @@ var reconfigureBtn = document.querySelector('.config-btn');
 var playAgainEndBtn = document.querySelector('.play-again-end-btn');
 var drawDisplay = document.querySelector('.draw-count span');
 
-
 var playerMove = function (row, column, marker) {  
   if (!roundWon) {
     console.log(`--BEGIN PLAYER MOVE--`)
@@ -103,7 +102,7 @@ var checkColumn = function(numCols, board) {
   }
 }
 
-// Just swapped push and shift to reverse (refactor later)
+
 var checkDiagonalAcending = function() {
   // 1. Make a copy of the original board ready to shift
   var boardShifted = [];
@@ -129,13 +128,13 @@ var checkDiagonalAcending = function() {
     }
     endAdd++;
   }
-  console.table(board);
-  console.table(boardShifted)
+  // console.table(board);
+  // console.table(boardShifted)
   // Then run checkColumn() on the shifted array
   checkColumn(shiftedColumns, boardShifted);
 }
 
-
+// Same as acending - swapped push and shift (refactor later)
 var checkDiagonalDecending = function() {
   // 1. Make a copy of the original board ready to shift
   var boardShifted = [];
@@ -161,8 +160,8 @@ var checkDiagonalDecending = function() {
     }
     endAdd++;
   }
-  console.table(board);
-  console.table(boardShifted)
+  // console.table(board);
+  // console.table(boardShifted)
   // Then run checkColumn() on the shifted array
   checkColumn(shiftedColumns, boardShifted);
 }
@@ -239,7 +238,6 @@ var generateBoard = function(boardSize){
   return newBoard
 }
 
-
 var handleClick = function(event){
   var clickedBoxId = event.target.dataset.number;
   console.log(`User Clicked Box: ${clickedBoxId}`)
@@ -250,7 +248,6 @@ var handleClick = function(event){
   currentPlayer = whosTurnIsIt()
   playerMove(row, column, players[currentPlayer].token)
 }
-
 
 var newGame = function() {
   console.log('new game click')
@@ -300,5 +297,4 @@ var board = generateBoard(boardSize);
 // Event listeners
 boxes.forEach(function(box){box.addEventListener('click', handleClick)});
 reconfigureBtn.addEventListener('click', newGame);
-
 playAgainEndBtn.addEventListener('click', newGame);
