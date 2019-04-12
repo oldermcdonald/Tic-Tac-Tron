@@ -12,6 +12,7 @@ var player2Score = document.querySelector('.player2-score span');
 var boardSizeInput = document.querySelector('.board-size-input');
 var winStreakInput = document.querySelector('.win-streak-input');
 var configureButton = document.querySelector('.config-btn');
+var drawDisplay = document.querySelector('.draw-count span');
 
 
 var playerMove = function (row, column, marker) {  
@@ -21,13 +22,20 @@ var playerMove = function (row, column, marker) {
     if (board[row][column] == spaces) {
       // Update array with player marker
       board[row][column] = marker;
-      // Swap to other player
-      clickCount++;
-      // Update Colour
+      // Update DOM Content
       event.target.style.background = players[currentPlayer].colour;
+      event.target.textContent = players[currentPlayer].token;
       console.table(board);
       console.log('Checking for a win:');
       checkWin()
+      // Iterate click count for other player
+      clickCount++;
+      
+        // If all clicked, then draw
+      if (clickCount == (boardSize * boardSize)){
+        gameDraw ();
+      }
+
     } else {
       console.log('Invalid move - position taken');
     }
@@ -44,6 +52,7 @@ var checkWin = function() {
   checkDiagonalDecending();
   checkDiagonalAcending();
 }
+
 
 var checkRow = function(){
   board.forEach(function(row){
@@ -162,10 +171,17 @@ var checkDiagonalDecending = function() {
 var gameWon = function() {
   console.log(`* ${currentPlayer} WINS THE ROUND *`);
   gameStatus.textContent = "Winner: " + currentPlayer;
-  document.body.style.backgroundColor = "Gold";
+  document.body.style.backgroundColor = "#FFD3B8";
   players[currentPlayer].score ++
   updateScores();
   roundWon = true;
+}
+
+
+var gameDraw = function(){
+  console.log(`Game Draw`)
+  drawCount ++;
+  drawDisplay.textContent = drawCount;
 }
 
 
@@ -177,6 +193,7 @@ var updateScores = function() {
 var resetScores = function(){
   players["Player 1"].score = 0;
   players["Player 2"].score = 0;
+  drawCount = 0;
 }
 
 var whosTurnIsIt = function (){
@@ -265,13 +282,13 @@ var players = {
     name: 'Dave',
     score: 0,
     token: 'X',
-    colour: 'mistyrose'
+    colour: '#78D6FF'
   },
   'Player 2': {
     name: 'Stanley',
     score: 0,
     token: 'O',
-    colour: 'lightblue'
+    colour: '#CC6B4B'
   }
 }
 var boardSize = boardSizeInput.value;
@@ -280,6 +297,7 @@ var clickCount = 0;
 var currentPlayer;
 var numMatchesRequired = winStreakInput.value;
 var roundWon = false;
+var drawCount = 0;
 
 // Generate initial board
 var board = generateBoard(boardSize);

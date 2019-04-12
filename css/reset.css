@@ -1,3 +1,11 @@
 * {
   box-sizing: border-box;
 }
+
+html, body, div, h1, h2, h3, h4, h5, h6, p, a, img, ol, ul, li, aside, footer, header, nav, section {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
