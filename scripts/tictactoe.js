@@ -1,6 +1,24 @@
 // GA SEI - Project 1 - Tic Tac Toe Game
 // David McDonald - April 2019
 
+/* Extra Features to add: 
+
+- Computer Player algorithm - research this
+- Fix CSS - make responsive
+- Give theme
+- Settings hamburger menu
+- Add optional timer
+- Option to play against yourself and NOT win under time pressure
+- Add local storage with JSON
+- Limit size of board to max 10x10?
+- Ability to set player name
+- Store player state
+- animations / feedback
+-
+
+
+*/
+
 // Get DOM Objects
 var gameContainer = document.querySelector(`.game-container`);
 var boxes = document.querySelectorAll(`.game-container div`);
@@ -21,9 +39,12 @@ var playerMove = function (row, column, marker) {
     if (board[row][column] == spaces) {
       // Update array with player marker
       board[row][column] = marker;
+
       // Update DOM Content
-      event.target.style.background = players[currentPlayer].colour;
+      // event.target.style.color = players[currentPlayer].style;
+      event.target.classList.add(players[currentPlayer].style);
       event.target.textContent = players[currentPlayer].token;
+      
       console.table(board);
       console.log('Checking for a win:');
       checkWin()
@@ -52,7 +73,6 @@ var checkWin = function() {
   checkDiagonalAcending();
 }
 
-
 var checkRow = function(){
   board.forEach(function(row){
     console.log(`Checking Row: ${row}`);
@@ -74,7 +94,7 @@ var checkRow = function(){
   })
 }
 
-var checkColumn = function(numCols, board) {
+var checkColumn = function(numCols, board){
   for (col=0; col < numCols; col++) {
     // First make column array to check
     var currentColumn = [];
@@ -102,8 +122,7 @@ var checkColumn = function(numCols, board) {
   }
 }
 
-
-var checkDiagonalAcending = function() {
+var checkDiagonalAcending = function(){
   // 1. Make a copy of the original board ready to shift
   var boardShifted = [];
   board.forEach(function(row){
@@ -134,8 +153,7 @@ var checkDiagonalAcending = function() {
   checkColumn(shiftedColumns, boardShifted);
 }
 
-// Same as acending - swapped push and shift (refactor later)
-var checkDiagonalDecending = function() {
+var checkDiagonalDecending = function(){
   // 1. Make a copy of the original board ready to shift
   var boardShifted = [];
   board.forEach(function(row){
@@ -160,16 +178,16 @@ var checkDiagonalDecending = function() {
     }
     endAdd++;
   }
-  // console.table(board);
-  // console.table(boardShifted)
+  console.table(board);
+  console.table(boardShifted)
   // Then run checkColumn() on the shifted array
   checkColumn(shiftedColumns, boardShifted);
 }
 
-var gameWon = function() {
+var gameWon = function(){
   console.log(`* ${currentPlayer} WINS THE ROUND *`);
   gameStatus.textContent = "Winner: " + currentPlayer;
-  document.body.style.backgroundColor = "#FFD3B8";
+  // document.body.style.backgroundColor = "#FFD3B8";
   players[currentPlayer].score ++
   updateScores();
   roundWon = true;
@@ -202,7 +220,6 @@ var whosTurnIsIt = function (){
     return Object.keys(players)[1]
   }
 }
-
 
 var generateBoard = function(boardSize){
   var newBoard = [];
@@ -249,7 +266,7 @@ var handleClick = function(event){
   playerMove(row, column, players[currentPlayer].token)
 }
 
-var newGame = function() {
+var newGame = function(){
   console.log('new game click')
   // Clear existing game container divs
   while (gameContainer.hasChildNodes()){
@@ -258,7 +275,7 @@ var newGame = function() {
   // Reset DOM elements
   playAgainEndBtn.classList.toggle('hidden');
   gameStatus.textContent = "";
-  document.body.style.backgroundColor = "transparent";
+  // document.body.style.backgroundColor = "transparent";
   roundWon = false;
   clickCount = 0;
   // Get user configurations
@@ -268,21 +285,23 @@ var newGame = function() {
   board = generateBoard(boardSize)
 }
 
+
 // Declare Global Variables
 var players = {
   'Player 1': {
-    name: 'Dave',
+    name: 'Rinzler',
     score: 0,
     token: 'X',
-    colour: '#78D6FF'
+    style: 'neon-blue' //blue
   },
   'Player 2': {
-    name: 'Stanley',
+    name: 'Clu',
     score: 0,
     token: 'O',
-    colour: '#CC6B4B'
+    style: 'neon-orange'
   }
 }
+
 var boardSize = boardSizeInput.value;
 var spaces;
 var clickCount = 0;

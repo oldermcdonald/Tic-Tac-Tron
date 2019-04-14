@@ -1,60 +1,132 @@
+/* ------ Global styles ------ */
+
+@font-face {
+  font-family: 'TR2N';
+  src: url('fonts/tr2n/Tr2n.ttf') format('truetype');
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'ds-digital';
+  src: url('fonts/ds_digital/DS-DIGI.TTF') format('truetype');
+  font-weight: normal;
+}
+
 * {
   /* border: 1px solid grey; */
+  color: white;
 }
 
 
 body {
+  background-color: black;
+}
+
+
+.main-container {
   width: 100vw;
-  font-family: Arial, Helvetica, sans-serif
-}
-
-
-header {
+  font-family: Arial, Helvetica, sans-serif;
+  border: 1px solid #8ef0fe;
+  padding: 0.5em;
   text-align: center;
+  margin: 0 auto;
 }
+
+
+
+
+
+/* ------ Scoreboard ------ */
 
 header h1 {
-  color: #CC6B4B;
+  border: 1px solid #8ef0fe;
+  text-align: center;
+  color: #8ef0fe;
   font-size: 4em;
-  font-family: 'Anton', sans-serif;
+  font-family: 'TR2N', sans-serif;
+  padding-top: 0.2em;
 }
-
 
 .scoreboard {
   display: flex;
   justify-content: space-between;
 }
 
-
 .player-container {
-  height: 10em;
+  padding: 0.5em 0em;
+}
+
+.player1-score {
+  text-align: left;
+}
+.player2-score {
+  text-align: right;
+}
+
+.score {
+  border: 1px solid #8ef0fe;
+  padding: 0.5em;
 }
 
 .score span{
-  font-size: 2em;
-  color: #CC6B4B
+  color: #8ef0fe;
+  font-family: 'ds-digital';
+  font-size: 4em;
+  color: #8ef0fe;
 }
 
+.player-name-container {
+  border: 1px solid orange;
+  padding: 0.5em;
+  margin: 0.5em 0em;
+}
+
+.player-name-container h3 {
+  display: inline-block;
+}
+
+.player-name-container span {
+  border: 1px solid orange;
+  padding: 0.2em;
+}
+
+
+
+
+
+/* ------ Game ------ */
 
 .game-container {
   display: flex;
   flex-wrap: wrap;
   height: 100vw;
+  vertical-align: center;
 }
 
 .game-container div {
-  background-color: lightgrey;
-  border: 2px solid black;
-  font-size: 10vw;
+  border: 1px solid #8ef0fe;
+  line-height: 1.5em;
+  font-family: 'TR2N', sans-serif;
+  font-size: 6em;
   text-align: center;
-  padding: 3vw 0
+  /* animation: neon-blue 1.5s ease-in-out infinite alternate; */
 }
 
 .game-container div:hover {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 
+.neon-blue {
+  color: #8ef0fe;
+  animation: neon-blue 1.5s ease-in-out infinite alternate;
+}
+.neon-orange {
+  color: #f8d634;
+  animation: neon-orange 1.5s ease-in-out infinite alternate;
+}
+
+
+/* ------ Adjustable sizes ------ */
 .three div {
   width: 33.3%;
   height: 33.3%;
@@ -75,6 +147,11 @@ header h1 {
   height: 16.6%;
 }
 
+
+
+
+
+/* ------ Interactive ------ */
 .play-again-end-btn {
   border-radius: 0.2em;
   position: absolute;
@@ -83,21 +160,62 @@ header h1 {
   padding: 0.5em 2em;
   text-decoration: none;
   font-size: 2em;
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
 }
-
 
 .hidden {
   display: none;
 }
 
 
-/* @media only screen and (min-width: 600px) {
-  body {
-    width: 600px;
 
+
+/* ------ Media queries ------ */
+@media only screen and (max-width: 30em) {
+  header h1 {
+    font-size: 3em;
   }
-} */
+}
+
+@media only screen and (min-width: 45em) {
+  .main-container {
+    width: 70vw;
+  }
+  .game-container {
+    height: 70vw;
+  }
+}
+
+@media only screen and (min-width: 55em) {
+  .main-container {
+    width: 35vw;
+  }
+  .game-container {
+    height: 35vw;
+  }
+}
 
 
+
+
+
+/* ------ animations ------ */
+
+@keyframes neon-blue {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228DFF, 0 0 70px #228DFF, 0 0 80px #228DFF, 0 0 100px #228DFF, 0 0 150px #228DFF;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228DFF, 0 0 35px #228DFF, 0 0 40px #228DFF, 0 0 50px #228DFF, 0 0 75px #228DFF;
+  }
+}
+
+@keyframes neon-orange {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #f8d634, 0 0 70px #f8d634, 0 0 80px #f8d634, 0 0 100px #f8d634, 0 0 150px #f8d634;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #f8d634, 0 0 35px #f8d634, 0 0 40px #f8d634, 0 0 50px #f8d634, 0 0 75px #f8d634;
+  }
+}
