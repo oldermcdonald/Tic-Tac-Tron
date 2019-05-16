@@ -3,7 +3,7 @@
 
 ## 1. 🕹 [Play Here](https://oldermcdonald.github.io/Tic-Tac-Tron/)🕹
 
-![Screenshot](./Screenshot.png?raw=true "Screenshot")
+![Screenshot](./Screenshot.png?raw=true | width=100 "Screenshot")
 
 ## 2. 📜 Project Brief:
 To build an interactive front-end app that functions as a 2-player tic tac toe game, styled with CSS and given a Tron theme. Built with HTML, CSS and Javascript.
