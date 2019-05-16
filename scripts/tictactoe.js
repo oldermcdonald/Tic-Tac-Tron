@@ -24,8 +24,8 @@ var gameContainer = document.querySelector(`.game-container`);
 var boxes = document.querySelectorAll(`.game-container div`);
 var playersTurnDisplay = document.querySelector('.players-turn span');
 var gameStatus = document.querySelector('.game-status span');
-var player1Score = document.querySelector('.player1-score span');
-var player2Score = document.querySelector('.player2-score span');
+var player1Score = document.querySelector('.player1 .score span');
+var player2Score = document.querySelector('.player2 .score  span');
 var boardSizeInput = document.querySelector('.board-size-input');
 var winStreakInput = document.querySelector('.win-streak-input');
 var reconfigureBtn = document.querySelector('.config-btn');
@@ -44,7 +44,7 @@ var playerMove = function (row, column, marker) {
       // event.target.style.color = players[currentPlayer].style;
       event.target.classList.add(players[currentPlayer].style);
       event.target.textContent = players[currentPlayer].token;
-      
+
       console.table(board);
       console.log('Checking for a win:');
       checkWin()
