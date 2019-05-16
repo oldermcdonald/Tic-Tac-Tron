@@ -1,4 +1,4 @@
-# ✨✨ - TIC-TAC-TRON - ✨✨
+# ✨✨ TIC-TAC-TRON ✨✨
 (GA Software Engineering Immersive - Project 1)
 
 ## 1. 🕹 [Play Here](https://oldermcdonald.github.io/Tic-Tac-Tron/) 🕹
