@@ -2,7 +2,7 @@
 GA SEI - Project 1 - Tic Tac Toe Game
 
 Play here:
-https://oldermcdonald.github.io/Tic-Tac-Toe/
+https://oldermcdonald.github.io/Tic-Tac-Tron/
 
 Features Include:
 - Adjustable Board Size
