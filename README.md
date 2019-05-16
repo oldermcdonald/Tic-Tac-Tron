@@ -1,9 +1,12 @@
 # ✨✨ - TIC-TAC-TRON - ✨✨
 (GA Software Engineering Immersive - Project 1)
 
-## 1. 🕹 [Play Here](https://oldermcdonald.github.io/Tic-Tac-Tron/)🕹
+## 1. 🕹 [Play Here](https://oldermcdonald.github.io/Tic-Tac-Tron/) 🕹
 
-![Screenshot](./Screenshot.png?raw=true | width=100 "Screenshot")
+
+<a href="https://oldermcdonald.github.io/Tic-Tac-Tron/">
+  <img src="./Screenshot.png" width="200" height="270" alt="screenshot">
+</a>
 
 ## 2. 📜 Project Brief:
 To build an interactive front-end app that functions as a 2-player tic tac toe game, styled with CSS and given a Tron theme. Built with HTML, CSS and Javascript.
