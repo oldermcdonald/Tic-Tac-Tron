@@ -1,7 +1,7 @@
 # ✨✨ TIC-TAC-TRON ✨✨
 (GA Software Engineering Immersive - Project 1)
 
-## 🕹 [Play Here](https://oldermcdonald.github.io/Tic-Tac-Tron/) 🕹
+## 🕹 [Play Tic-Tac-Tron](https://oldermcdonald.github.io/Tic-Tac-Tron/) 🕹
 
 
 <a href="https://oldermcdonald.github.io/Tic-Tac-Tron/">
