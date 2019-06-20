@@ -15,7 +15,6 @@
   color: white;
 }
 
-
 body {
   background-color: black;
 }
@@ -74,7 +73,7 @@ header h1 {
 }
 
 .player-name-container {
-  border: 1px solid orange;
+  border: 1px solid #f8d634;
   padding: 0.5em;
   margin: 0.5em 0em;
 }
@@ -85,7 +84,7 @@ header h1 {
 }
 
 .player-name-container span {
-  border: 1px solid orange;
+  border: 1px solid #f8d634;
   padding: 0.2em;
 }
 
@@ -116,7 +115,6 @@ header h1 {
   font-family: 'TR2N', sans-serif;
   font-size: 6em;
   text-align: center;
-  /* animation: neon-blue 1.5s ease-in-out infinite alternate; */
 }
 
 .game-container div:hover {
@@ -135,6 +133,7 @@ header h1 {
 
 
 /* ------ Adjustable sizes ------ */
+
 .three div {
   width: 33.3%;
   height: 33.3%;
@@ -156,13 +155,154 @@ header h1 {
 }
 
 
+/* ------ Settings ------ */
+
+.settings-container {
+  display: block;
+}
+
+.config-btn {
+  background: white;
+  color: black;
+}
+
+/* ------ Hamburger Menu Button ------ */
+/* 
+#hamburger {
+  height: 50px;
+  width: 50px;
+  background: white;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all .2s ease;
+  z-index: 9999;
+}
+
+#hamburger:hover {
+  box-shadow: 0 0 5px rgb(122, 200, 249);
+  transform: scale(1.1);
+  transition: all .2s ease;
+}
+
+#hamburger span {
+  display: block;
+  position: absolute;
+  height: 2px;
+  width: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: black;
+  border-radius: 10px;
+  transition: all .15s ease;
+}
+
+#hamburger span:first-child { top: 17px }
+#hamburger span:nth-child(2) { top: 25px }
+#hamburger span:last-child { top: 33px }
+
+#hamburger.close {
+  top: 20px;
+  right: 20px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.15);
+}
+
+#hamburger.close span:first-child {
+  top: 15px;
+  transform: translate(-10px, 10px) rotate(135deg);
+}
+
+#hamburger.close span:nth-child(2) {
+  left: -20px;
+  opacity: 0;
+}
+
+#hamburger.close span:last-child {
+  top: 15px;
+  transform: translate(-10px, 10px) rotate(-135deg)
+} */
+
+
+/* ------ Settings Menu ------ */
+
+/* .sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+} */
+
+
+/* .settings {
+  position: relative;
+  height: 100vh;
+  right: 0;
+  background: white;
+  color: black;
+  width: 200px;
+  box-shadow: 0 1px 20px rgba(0,0,0,0.25);
+  z-index: 1;  
+  transform: translateX(-200px);
+  opacity: 0;
+  transition: all .2s ease-in-out;
+}
+
+.settings ul {
+  list-style: none;
+  padding: 40px 0 0 0;
+}
+
+.settings li {
+width: 100%;
+transition: all .15s ease;
+}
+
+.settings a {
+  display: block;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+}
+
+.settings a:hover {
+  background: #f8d634;
+  color: black;
+  transition: all .15s ease;
+}  
+
+.settings.visible {
+  transform: translateX(0);
+  opacity: 1;
+} */
+
 
 
 
 /* ------ Interactive ------ */
 .play-again-end-btn {
   border-radius: 0.2em;
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -177,13 +317,9 @@ header h1 {
 }
 
 
-
-
 .hidden {
   display: none;
 }
-
-
 
 
 /* ------ Media queries ------ */

@@ -26,7 +26,6 @@
             <h3>PLAYER ONE</h3>
           </div>
         </div>
-        
 
         <div class="draw-container">
           <p class="draw-count score"><span>0</span></p>
@@ -48,18 +47,50 @@
     <div class="game-container">
     </div>
     
-    
     <button class="play-again-end-btn hidden">Play again</button>
     
+    <!-- <div class="settings-containter-new">
+      <div id="hamburger" class="close">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div id="sidenav" class="visible">
+        <ul>
+          <li>Board Size</li>
+          <li>Win Requirement</li>
+          <li>About</li>
+        </ul>
+      </div>
+    </div> -->
+
+    <!-- Put these settings into slide out hamburger menu -->
     
-    <div class="settings-container hidden">
+    <div class="settings-container">
       <button class="config-btn">PLAY AGAIN</button>
       <p class="players-turn">Who just clicked: <span></span></p>
       <p class="game-status">Game status: <span></span></p>
       <h3>Settings</h3>
+
+
+
       <P>Select Board Size</P>
-      <input class="board-size-input" type="text" placeholder="Number of rows" value="3">
-      
+
+      <!-- <input class="board-size-input" type="text" placeholder="Number of rows" value="3"> -->
+
+      <form action="#n" id="board-size">
+        <label><input type="radio" id="sml" name="size" value="3" checked="checked">small</label>
+        <label><input type="radio" id="med" name="size" value="4">medium</label>
+        <label><input type="radio" id="lge" name="size" value="5">huge</label>
+        <!-- <button onclick="" value="reset">Reset Game</button> -->
+      </form>
+
+    
+
+
+
+
       <p>Select number in row to win</p>
       <input class="win-streak-input" type="text" placeholder="How many in a row" value="3">
     </div>

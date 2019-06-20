@@ -2,22 +2,15 @@
 // David McDonald - April 2019
 
 /* Extra Features to add: 
-
-- Computer Player algorithm - research this
-- Fix CSS - make responsive
-- Give theme
+- Computer Player algorithm
 - Settings hamburger menu
-- Add optional timer
+- Optional timer
 - Option to play against yourself and NOT win under time pressure
-- Add local storage with JSON
-- Limit size of board to max 10x10?
 - Ability to set player name
 - Store player state
-- animations / feedback
--
-
-
+- animations
 */
+
 
 // Get DOM Objects
 var gameContainer = document.querySelector(`.game-container`);
@@ -26,11 +19,35 @@ var playersTurnDisplay = document.querySelector('.players-turn span');
 var gameStatus = document.querySelector('.game-status span');
 var player1Score = document.querySelector('.player1 .score span');
 var player2Score = document.querySelector('.player2 .score  span');
-var boardSizeInput = document.querySelector('.board-size-input');
+
+// var boardSizeInput = document.querySelector('.board-size-input');
+var boardSizeForm = document.getElementById('board-size');
+
 var winStreakInput = document.querySelector('.win-streak-input');
 var reconfigureBtn = document.querySelector('.config-btn');
 var playAgainEndBtn = document.querySelector('.play-again-end-btn');
 var drawDisplay = document.querySelector('.draw-count span');
+
+
+
+var getRadioVal = function (form, name) {
+  let val;
+  // get list of radio buttons with specified name
+  var radios = form.elements[name];
+  // loop through list of radio buttons
+  for (var i=0; i < radios.length; i++) {
+    if (radios[i].checked) { // radio checked?
+      val = radios[i].value;
+      break;
+    }
+  }
+  return val; // return value of checked radio button or undefined if none checked
+}
+
+var getBoardSize = function() {
+  return getRadioVal(boardSizeForm, 'size')
+}
+
 
 var playerMove = function (row, column, marker) {  
   if (!roundWon) {
@@ -64,16 +81,14 @@ var playerMove = function (row, column, marker) {
 }
 
 var checkWin = function() {
-  console.log('---- CHECKING ROWS ----');
   checkRow();
-  console.log('---- CHECKING COLUMNS ----');
   checkColumn(boardSize, board);
-  console.log('--- CHECKING DIAGONALS ---');
   checkDiagonalDecending();
   checkDiagonalAcending();
 }
 
 var checkRow = function(){
+  console.log('---- CHECKING ROWS ----');
   board.forEach(function(row){
     console.log(`Checking Row: ${row}`);
     var duplicateCounter = 0;
@@ -95,6 +110,7 @@ var checkRow = function(){
 }
 
 var checkColumn = function(numCols, board){
+  console.log('---- CHECKING COLUMNS ----');
   for (col=0; col < numCols; col++) {
     // First make column array to check
     var currentColumn = [];
@@ -123,6 +139,7 @@ var checkColumn = function(numCols, board){
 }
 
 var checkDiagonalAcending = function(){
+  console.log('--- CHECKING DIAGONALS ---');
   // 1. Make a copy of the original board ready to shift
   var boardShifted = [];
   board.forEach(function(row){
@@ -154,6 +171,7 @@ var checkDiagonalAcending = function(){
 }
 
 var checkDiagonalDecending = function(){
+  console.log('--- CHECKING DIAGONALS ---');
   // 1. Make a copy of the original board ready to shift
   var boardShifted = [];
   board.forEach(function(row){
@@ -211,7 +229,7 @@ var resetScores = function(){
   drawCount = 0;
 }
 
-var whosTurnIsIt = function (){
+var whosTurnIsIt = function(){
   if (clickCount % 2 == 0) {
     playersTurnDisplay.textContent = Object.keys(players)[0]
     return Object.keys(players)[0]
@@ -281,7 +299,7 @@ var newGame = function(){
   // Get user configurations
   numMatchesRequired = winStreakInput.value;
   // Generate a new board
-  boardSize = boardSizeInput.value;
+  boardSize = getBoardSize();
   board = generateBoard(boardSize)
 }
 
@@ -292,7 +310,7 @@ var players = {
     name: 'Rinzler',
     score: 0,
     token: 'X',
-    style: 'neon-blue' //blue
+    style: 'neon-blue'
   },
   'Player 2': {
     name: 'Clu',
@@ -302,7 +320,7 @@ var players = {
   }
 }
 
-var boardSize = boardSizeInput.value;
+var boardSize = getBoardSize();
 var spaces;
 var clickCount = 0;
 var currentPlayer;
