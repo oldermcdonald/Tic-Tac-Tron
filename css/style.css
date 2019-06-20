@@ -97,7 +97,9 @@ header h1 {
   font-size: 0.8em;
 }
 
-
+.game-status-container {
+  height: 1.5em;
+}
 
 /* ------ Game ------ */
 
@@ -106,15 +108,16 @@ header h1 {
   flex-wrap: wrap;
   height: 100vw;
   vertical-align: center;
-  margin-top: 0.5em;
 }
 
 .game-container div {
-  border: 1px solid #8ef0fe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   line-height: 1.5em;
   font-family: 'TR2N', sans-serif;
   font-size: 6em;
-  text-align: center;
+  border: 1px solid #8ef0fe;
 }
 
 .game-container div:hover {
@@ -137,21 +140,26 @@ header h1 {
 .three div {
   width: 33.3%;
   height: 33.3%;
+  font-size: 5.5em;
 }
+
 
 .four div {
   width: 25%;
   height: 25%;
+  font-size: 4em;
 }
 
 .five div {
   width: 20%;
   height: 20%;
+  font-size: 3.5em;
 }
 
 .six div {
   width: 16.6%;
   height: 16.6%;
+  font-size: 2.5em;
 }
 
 

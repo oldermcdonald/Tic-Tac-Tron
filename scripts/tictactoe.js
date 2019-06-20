@@ -15,14 +15,11 @@
 // Get DOM Objects
 var gameContainer = document.querySelector(`.game-container`);
 var boxes = document.querySelectorAll(`.game-container div`);
-var playersTurnDisplay = document.querySelector('.players-turn span');
+// var playersTurnDisplay = document.querySelector('.players-turn span');
 var gameStatus = document.querySelector('.game-status span');
 var player1Score = document.querySelector('.player1 .score span');
 var player2Score = document.querySelector('.player2 .score  span');
-
-// var boardSizeInput = document.querySelector('.board-size-input');
 var boardSizeForm = document.getElementById('board-size');
-
 var winStreakInput = document.querySelector('.win-streak-input');
 var reconfigureBtn = document.querySelector('.config-btn');
 var playAgainEndBtn = document.querySelector('.play-again-end-btn');
@@ -204,7 +201,7 @@ var checkDiagonalDecending = function(){
 
 var gameWon = function(){
   console.log(`* ${currentPlayer} WINS THE ROUND *`);
-  gameStatus.textContent = "Winner: " + currentPlayer;
+  gameStatus.textContent = `${currentPlayer} Wins`;
   // document.body.style.backgroundColor = "#FFD3B8";
   players[currentPlayer].score ++
   updateScores();
@@ -214,8 +211,10 @@ var gameWon = function(){
 
 var gameDraw = function(){
   console.log(`Game Draw`)
+  gameStatus.textContent = `Its a draw!`;
   drawCount ++;
   drawDisplay.textContent = drawCount;
+  playAgainEndBtn.classList.toggle('hidden');
 }
 
 var updateScores = function() {
@@ -231,10 +230,10 @@ var resetScores = function(){
 
 var whosTurnIsIt = function(){
   if (clickCount % 2 == 0) {
-    playersTurnDisplay.textContent = Object.keys(players)[0]
+    // playersTurnDisplay.textContent = Object.keys(players)[0]
     return Object.keys(players)[0]
   } else {
-    playersTurnDisplay.textContent = Object.keys(players)[1]
+    // playersTurnDisplay.textContent = Object.keys(players)[1]
     return Object.keys(players)[1]
   }
 }
