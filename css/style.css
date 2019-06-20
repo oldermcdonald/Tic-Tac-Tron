@@ -2,12 +2,13 @@
 
 @font-face {
   font-family: 'TR2N';
-  src: url('fonts/tr2n/Tr2n.ttf') format('truetype');
+  /* src: url('fonts/tr2n/Tr2n.ttf') format('truetype'); */
+  src: url('../fonts/tr2n/webfont/tr2n-webfont.woff') format('woff');
   font-weight: normal;
 }
 @font-face {
   font-family: 'ds-digital';
-  src: url('fonts/ds_digital/DS-DIGI.TTF') format('truetype');
+  src: url('../fonts/ds_digital/webfont/ds-digi-webfont.woff') format('woff');
   font-weight: normal;
 }
 
@@ -38,7 +39,7 @@ body {
 /* ------ Scoreboard ------ */
 
 header h1 {
-  border: 1px solid #8ef0fe;
+  /* border: 1px solid #8ef0fe; */
   text-align: center;
   color: #8ef0fe;
   font-size: 4em;
