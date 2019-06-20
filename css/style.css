@@ -2,7 +2,6 @@
 
 @font-face {
   font-family: 'TR2N';
-  /* src: url('fonts/tr2n/Tr2n.ttf') format('truetype'); */
   src: url('../fonts/tr2n/webfont/tr2n-webfont.woff') format('woff');
   font-weight: normal;
 }
@@ -13,7 +12,6 @@
 }
 
 * {
-  /* border: 1px solid grey; */
   color: white;
 }
 
@@ -53,7 +51,7 @@ header h1 {
 }
 
 .player-container {
-  padding: 0.5em 0em;
+  /* padding: 0.5em 0em; */
 }
 
 .player1-score {
@@ -83,6 +81,7 @@ header h1 {
 
 .player-name-container h3 {
   display: inline-block;
+  font-size: 0.8em;
 }
 
 .player-name-container span {
@@ -90,7 +89,14 @@ header h1 {
   padding: 0.2em;
 }
 
+.draw-container {
 
+}
+
+.draw-container h3 {
+  margin-top: 0.5em;
+  font-size: 0.8em;
+}
 
 
 
@@ -101,6 +107,7 @@ header h1 {
   flex-wrap: wrap;
   height: 100vw;
   vertical-align: center;
+  margin-top: 0.5em;
 }
 
 .game-container div {
@@ -155,15 +162,22 @@ header h1 {
 /* ------ Interactive ------ */
 .play-again-end-btn {
   border-radius: 0.2em;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
-  padding: 0.5em 2em;
+  transform: translate(-50%, -50%);
+  padding: 0.2em;
   text-decoration: none;
   font-size: 2em;
-  background-color: white;
+  font-family: 'ds-digital';
+  background-color: #f8d634;
   color: black;
+  border: black 2px solid;
+  box-shadow:  0px 15px 20px rgba(46, 229, 157, 0.5)
 }
+
+
+
 
 .hidden {
   display: none;
