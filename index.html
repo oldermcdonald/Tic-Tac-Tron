@@ -12,13 +12,10 @@
 <body>
 
   <div class="main-container">
-    
-    <header>
-      
+
+    <header>    
       <h1>The Grid</h1>
-
       <div class="scoreboard">
-
         <div class="player-container player1">
           <p class="score"><span>0</span></p>
           <div class="player-name-container">
@@ -26,12 +23,10 @@
             <h3>PLAYER ONE</h3>
           </div>
         </div>
-
         <div class="draw-container">
           <p class="draw-count score"><span>0</span></p>
           <h3>DRAW</h3>
         </div>
-        
         <div class="player-container player2">
           <p class="score"><span>0</span></p>
           <div class="player-name-container">
@@ -39,7 +34,6 @@
             <h3>PLAYER TWO</h3>
           </div>
         </div>
-        
       </div>
     </header>
 
@@ -52,50 +46,21 @@
     
     <button class="play-again-end-btn hidden">Play again</button>
     
-    <!-- <div class="settings-containter-new">
-      <div id="hamburger" class="close">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-
-      <div id="sidenav" class="visible">
-        <ul>
-          <li>Board Size</li>
-          <li>Win Requirement</li>
-          <li>About</li>
-        </ul>
-      </div>
-    </div> -->
-
-    <!-- Put these settings into slide out hamburger menu -->
-    
     <div class="settings-container">
       <button class="config-btn">RESET</button>
-      <!-- <p class="players-turn">Who just clicked: <span></span></p> -->
 
-      <!-- <h3>Settings</h3> -->
-
-
-
-      <P>Board Size</P>
-
-      <!-- <input class="board-size-input" type="text" placeholder="Number of rows" value="3"> -->
-
+      <P>Settings:</P>
       <form action="#n" id="board-size">
         <label><input type="radio" id="sml" name="size" value="3" checked="checked">small</label>
         <label><input type="radio" id="med" name="size" value="4">medium</label>
         <label><input type="radio" id="lge" name="size" value="5">huge</label>
-        <!-- <button onclick="" value="reset">Reset Game</button> -->
       </form>
 
-    
+      <form action="#n" id="win-condition">
+        <label><input type="radio" id="three-in-a-row" name="win" value="3" checked="checked">3 in a row</label>
+        <label><input type="radio" id="entire-row" name="win" value="entire">Entire Row</label>
+      </form>
 
-
-
-
-      <p>Select number in row to win</p>
-      <input class="win-streak-input" type="text" placeholder="How many in a row" value="3">
     </div>
 
   </div>

@@ -1,33 +1,31 @@
 // GA SEI - Project 1 - Tic Tac Toe Game
 // David McDonald - April 2019
 
-/* Extra Features to add: 
+/* Possible extra Features to add: 
 - Computer Player algorithm
 - Settings hamburger menu
 - Optional timer
 - Option to play against yourself and NOT win under time pressure
 - Ability to set player name
 - Store player state
-- animations
 */
 
 
 // Get DOM Objects
 var gameContainer = document.querySelector(`.game-container`);
 var boxes = document.querySelectorAll(`.game-container div`);
-// var playersTurnDisplay = document.querySelector('.players-turn span');
 var gameStatus = document.querySelector('.game-status span');
 var player1Score = document.querySelector('.player1 .score span');
 var player2Score = document.querySelector('.player2 .score  span');
 var boardSizeForm = document.getElementById('board-size');
-var winStreakInput = document.querySelector('.win-streak-input');
+var winConditionForm = document.getElementById('win-condition');
 var reconfigureBtn = document.querySelector('.config-btn');
 var playAgainEndBtn = document.querySelector('.play-again-end-btn');
 var drawDisplay = document.querySelector('.draw-count span');
 
 
 
-var getRadioVal = function (form, name) {
+var getRadioValue = function (form, name) {
   let val;
   // get list of radio buttons with specified name
   var radios = form.elements[name];
@@ -42,9 +40,19 @@ var getRadioVal = function (form, name) {
 }
 
 var getBoardSize = function() {
-  return getRadioVal(boardSizeForm, 'size')
+  return parseInt(getRadioValue(boardSizeForm, 'size'))
 }
 
+var getWinCondition = function() {
+  let winCondition = getRadioValue(winConditionForm, 'win')
+  if (winCondition == 3) {
+    return 3
+  } else {
+    return getBoardSize()
+  }
+}
+
+console.log(getWinCondition())
 
 var playerMove = function (row, column, marker) {  
   if (!roundWon) {
@@ -66,7 +74,7 @@ var playerMove = function (row, column, marker) {
       clickCount++;
 
         // If all clicked, then draw
-      if (clickCount == (boardSize * boardSize)){
+      if (clickCount == (boardSize * boardSize)) {
         gameDraw ();
       }
 
@@ -84,13 +92,13 @@ var checkWin = function() {
   checkDiagonalAcending();
 }
 
-var checkRow = function(){
+var checkRow = function() {
   console.log('---- CHECKING ROWS ----');
   board.forEach(function(row){
     console.log(`Checking Row: ${row}`);
     var duplicateCounter = 0;
     var lastValue = '';
-    row.forEach(function(currentValue){
+    row.forEach(function(currentValue) {
       if (currentValue!= spaces && currentValue === lastValue) {
         duplicateCounter ++;
         if (duplicateCounter >= (numMatchesRequired - 1)) {
@@ -106,7 +114,7 @@ var checkRow = function(){
   })
 }
 
-var checkColumn = function(numCols, board){
+var checkColumn = function(numCols, board) {
   console.log('---- CHECKING COLUMNS ----');
   for (col=0; col < numCols; col++) {
     // First make column array to check
@@ -119,7 +127,7 @@ var checkColumn = function(numCols, board){
 
     var duplicateCounter = 0;
     var lastValue = '';
-    currentColumn.forEach(function(currentValue){
+    currentColumn.forEach(function(currentValue) {
       if (currentValue!= spaces && currentValue === lastValue) {
         duplicateCounter ++;
         if (duplicateCounter >= (numMatchesRequired - 1)) {
@@ -135,7 +143,7 @@ var checkColumn = function(numCols, board){
   }
 }
 
-var checkDiagonalAcending = function(){
+var checkDiagonalAcending = function() {
   console.log('--- CHECKING DIAGONALS ---');
   // 1. Make a copy of the original board ready to shift
   var boardShifted = [];
@@ -149,7 +157,7 @@ var checkDiagonalAcending = function(){
   var endAdd = 0;
   for (i=0; i < boardSize; i++){
     // Add spaces to front of array
-    for (j=0; j < frontAdd - 1; j++){
+    for (j=0; j < frontAdd - 1; j++) {
       boardShifted[i].push(spaces);
     }
     frontAdd--;
@@ -167,11 +175,11 @@ var checkDiagonalAcending = function(){
   checkColumn(shiftedColumns, boardShifted);
 }
 
-var checkDiagonalDecending = function(){
+var checkDiagonalDecending = function() {
   console.log('--- CHECKING DIAGONALS ---');
   // 1. Make a copy of the original board ready to shift
   var boardShifted = [];
-  board.forEach(function(row){
+  board.forEach(function(row) {
     boardShifted.push(row.slice(0));
   })
   // 2. Calculate number of columns once board has been shifted
@@ -179,14 +187,14 @@ var checkDiagonalDecending = function(){
   // 3. Shift the array by adding blanks
   var frontAdd = boardSize;
   var endAdd = 0;
-  for (i=0; i < boardSize; i++){
+  for (i=0; i < boardSize; i++) {
     // Add spaces to front of array
-    for (j=0; j < frontAdd - 1; j++){
+    for (j=0; j < frontAdd - 1; j++) {
       boardShifted[i].unshift(spaces);
     }
     frontAdd--;
     // Add spaces to end of array
-    for (k=0; k < endAdd; k++){
+    for (k=0; k < endAdd; k++) {
       if (i > 0) {
         boardShifted[i].push(spaces);
       }
@@ -199,7 +207,7 @@ var checkDiagonalDecending = function(){
   checkColumn(shiftedColumns, boardShifted);
 }
 
-var gameWon = function(){
+var gameWon = function() {
   console.log(`* ${currentPlayer} WINS THE ROUND *`);
   gameStatus.textContent = `${currentPlayer} Wins`;
   // document.body.style.backgroundColor = "#FFD3B8";
@@ -209,7 +217,7 @@ var gameWon = function(){
   playAgainEndBtn.classList.toggle('hidden');
 }
 
-var gameDraw = function(){
+var gameDraw = function() {
   console.log(`Game Draw`)
   gameStatus.textContent = `Its a draw!`;
   drawCount ++;
@@ -222,23 +230,21 @@ var updateScores = function() {
   player2Score.textContent = players["Player 2"].score
 }
 
-var resetScores = function(){
+var resetScores = function() {
   players["Player 1"].score = 0;
   players["Player 2"].score = 0;
   drawCount = 0;
 }
 
-var whosTurnIsIt = function(){
+var whosTurnIsIt = function() {
   if (clickCount % 2 == 0) {
-    // playersTurnDisplay.textContent = Object.keys(players)[0]
     return Object.keys(players)[0]
   } else {
-    // playersTurnDisplay.textContent = Object.keys(players)[1]
     return Object.keys(players)[1]
   }
 }
 
-var generateBoard = function(boardSize){
+var generateBoard = function(boardSize) {
   var newBoard = [];
   var boxCount = 1;
   spaces = '-';
@@ -258,7 +264,7 @@ var generateBoard = function(boardSize){
       gameContainer.appendChild(newBox);
       boxCount++;
       // Append size class to box
-      if (boardSize == 3){
+      if (boardSize == 3) {
         gameContainer.classList.add('three');
       } else if (boardSize == 4 ){
         gameContainer.classList.add('four');      
@@ -272,7 +278,7 @@ var generateBoard = function(boardSize){
   return newBoard
 }
 
-var handleClick = function(event){
+var handleClick = function(event) {
   var clickedBoxId = event.target.dataset.number;
   console.log(`User Clicked Box: ${clickedBoxId}`)
   // Convert clickedBoxId to row & column
@@ -283,10 +289,10 @@ var handleClick = function(event){
   playerMove(row, column, players[currentPlayer].token)
 }
 
-var newGame = function(){
+var newGame = function() {
   console.log('new game click')
   // Clear existing game container divs
-  while (gameContainer.hasChildNodes()){
+  while (gameContainer.hasChildNodes()) {
     gameContainer.removeChild(gameContainer.lastChild);
   }
   // Reset DOM elements
@@ -296,7 +302,7 @@ var newGame = function(){
   roundWon = false;
   clickCount = 0;
   // Get user configurations
-  numMatchesRequired = winStreakInput.value;
+  numMatchesRequired = getWinCondition()
   // Generate a new board
   boardSize = getBoardSize();
   board = generateBoard(boardSize)
@@ -323,7 +329,7 @@ var boardSize = getBoardSize();
 var spaces;
 var clickCount = 0;
 var currentPlayer;
-var numMatchesRequired = winStreakInput.value;
+var numMatchesRequired = getWinCondition()
 var roundWon = false;
 var drawCount = 0;
 

@@ -167,145 +167,38 @@ header h1 {
 
 .settings-container {
   display: block;
+  font-size: 1.5em;
+}
+
+.settings-container p {
+  color: #8ef0fe;
 }
 
 .config-btn {
   background: white;
   color: black;
+  padding: 0.4em 0.8em;
+  font-size: 1em;
+  margin: 0.5em 0;
 }
 
-/* ------ Hamburger Menu Button ------ */
-/* 
-#hamburger {
-  height: 50px;
-  width: 50px;
-  background: white;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all .2s ease;
-  z-index: 9999;
+form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-#hamburger:hover {
-  box-shadow: 0 0 5px rgb(122, 200, 249);
-  transform: scale(1.1);
-  transition: all .2s ease;
+form input {
+  height: 2.5em;
+  width: 2.5em;
 }
 
-#hamburger span {
-  display: block;
-  position: absolute;
-  height: 2px;
-  width: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: black;
-  border-radius: 10px;
-  transition: all .15s ease;
+form label {
+  display: flex;
+  align-items: center;
+  margin: 0.2em;
+  color: #8ef0fe;
 }
-
-#hamburger span:first-child { top: 17px }
-#hamburger span:nth-child(2) { top: 25px }
-#hamburger span:last-child { top: 33px }
-
-#hamburger.close {
-  top: 20px;
-  right: 20px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.15);
-}
-
-#hamburger.close span:first-child {
-  top: 15px;
-  transform: translate(-10px, 10px) rotate(135deg);
-}
-
-#hamburger.close span:nth-child(2) {
-  left: -20px;
-  opacity: 0;
-}
-
-#hamburger.close span:last-child {
-  top: 15px;
-  transform: translate(-10px, 10px) rotate(-135deg)
-} */
-
-
-/* ------ Settings Menu ------ */
-
-/* .sidenav {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
-
-.sidenav a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
-
-.sidenav a:hover {
-  color: #f1f1f1;
-} */
-
-
-/* .settings {
-  position: relative;
-  height: 100vh;
-  right: 0;
-  background: white;
-  color: black;
-  width: 200px;
-  box-shadow: 0 1px 20px rgba(0,0,0,0.25);
-  z-index: 1;  
-  transform: translateX(-200px);
-  opacity: 0;
-  transition: all .2s ease-in-out;
-}
-
-.settings ul {
-  list-style: none;
-  padding: 40px 0 0 0;
-}
-
-.settings li {
-width: 100%;
-transition: all .15s ease;
-}
-
-.settings a {
-  display: block;
-  padding: 20px;
-  width: 100%;
-  height: 100%;
-}
-
-.settings a:hover {
-  background: #f8d634;
-  color: black;
-  transition: all .15s ease;
-}  
-
-.settings.visible {
-  transform: translateX(0);
-  opacity: 1;
-} */
-
-
-
 
 /* ------ Interactive ------ */
 .play-again-end-btn {
@@ -314,7 +207,7 @@ transition: all .15s ease;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 0.2em;
+  padding: 0.3em;
   text-decoration: none;
   font-size: 2em;
   font-family: 'ds-digital';

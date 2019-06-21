@@ -1,23 +1,23 @@
-# ✨✨ TIC-TAC-TRON ✨✨
+# ✨ TIC-TAC-TRON ✨
 (GA Software Engineering Immersive - Project 1)
 
-## 🕹 [Play Tic-Tac-Tron](https://oldermcdonald.github.io/Tic-Tac-Tron/) 🕹
+## 🕹 [Play Tic Tac Tron](https://oldermcdonald.github.io/Tic-Tac-Tron/) 🕹
 
 
 <a href="https://oldermcdonald.github.io/Tic-Tac-Tron/">
-  <img src="./Screenshot.png" width="200" height="270" alt="screenshot">
+  <img src="./screenshot2.png" width="190" height="400" alt="screenshot">
 </a>
 
-## 📜 Project Brief
-To build an interactive front-end app that functions as a 2-player tic tac toe game, styled with CSS and given a Tron theme. Built with HTML, CSS and Javascript.
+## 📜 Brief
+Build an interactive front-end app that functions as a 2-player tic tac toe game, styled with CSS. Built with HTML, CSS and Javascript.
 
 
-## 💻 Game Features
+## 💻 Features
 - Live score board
-- Adjustable board size (3x3 up to 6x6)
-- Adjustable win condition (ie 3 or 4 in a row to win)
+- Adjustable board size
+- Adjustable win condition
 - Reset function
-- Responsive design (flexbox)
+- Responsive design
 - CSS animations
 - shaweeet neon effects
 
@@ -26,5 +26,5 @@ To build an interactive front-end app that functions as a 2-player tic tac toe g
 This was my first front-end project involving DOM manipulation and creation of elements with Javascript and I learned a bunch of new things including writing the algorithms to determine the winning conditions. As I wanted to create a board that could be increased in size the biggest challenge was coming up with the win condition for diagonal matches especially when not counting the entire row.
 
 
-## 🕒 Project Timing
+## 🕒 Timing
 Made in class over 2 days
